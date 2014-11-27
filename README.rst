@@ -5,6 +5,11 @@ This is the simplest SMTP server you'll ever see. It's asynchronous.
 
 One instance should handle over one thousand emails per second.
 
+This version adds flanker https://github.com/mailgun/flanker message 
+parsing and returns msg to handle so it's easier to create a proxy and
+manipulate original message.
+
+Original return values are kept ``` def handle(to, sender, subject, body, ``` for compatibility.
 
 Usage
 -----
@@ -16,7 +21,7 @@ Give your app an inbox easily::
     inbox = Inbox()
 
     @inbox.collate
-    def handle(to, sender, subject, body):
+    def handle(to, sender, subject, body, msg):
         ...
 
     # Bind directly.
