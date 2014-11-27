@@ -19,14 +19,14 @@ if sys.argv[-1] == 'publish':
 
 settings.update(
     name='inbox',
-    version='0.0.6',
+    version='0.0.7',
     description='SMTP for Humans.',
     long_description=open('README.rst').read(),
     author='Kenneth Reitz',
     author_email='me@kennethreitz.com',
     url='https://github.com/kennethreitz/inbox.py',
     py_modules= ['inbox',],
-    install_requires=['logbook', 'argparse'],
+    install_requires=['logbook', 'argparse','flanker'],
     license='BSD',
     classifiers=(
         # 'Development Status :: 5 - Production/Stable',

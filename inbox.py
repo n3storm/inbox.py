@@ -3,7 +3,7 @@
 import smtpd
 import asyncore
 import argparse
-from email.parser import Parser
+from flanker import mime
 
 from logbook import Logger
 
@@ -20,9 +20,10 @@ class InboxServer(smtpd.SMTPServer, object):
 
     def process_message(self, peer, mailfrom, rcpttos, data):
         log.info('Collating message from {0}'.format(mailfrom))
-        subject = Parser().parsestr(data)['subject']
+        msg = mime.from_string(data)
+        subject = msg.headers['subject']
         log.debug(dict(to=rcpttos, sender=mailfrom, subject=subject, body=data))
-        return self._handler(to=rcpttos, sender=mailfrom, subject=subject, body=data)
+        return self._handler(to=rcpttos, sender=mailfrom, subject=subject, body=data, msg=msg)
 
 
 class Inbox(object):
