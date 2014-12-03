@@ -3,13 +3,21 @@
 import smtpd
 import asyncore
 import argparse
+
 from flanker import mime
+from flanker.addresslib import address
 
 from logbook import Logger
 
 
 log = Logger(__name__)
 
+class Tools(object):
+    """Making available to import main flanker library modules."""
+
+    def __init__(self):
+        self.address = address
+        self.mime = mime
 
 class InboxServer(smtpd.SMTPServer, object):
     """Logging-enabled SMTPServer instance with handler support."""
